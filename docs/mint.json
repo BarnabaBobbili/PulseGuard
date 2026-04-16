@@ -1,0 +1,35 @@
+{
+  "$schema": "https://mintlify.com/mint.json",
+  "name": "PulseGuard",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#E11D48",
+    "light": "#F43F5E",
+    "dark": "#BE123C"
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@example.com"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "index",
+        "quickstart"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "architecture"
+      ]
+    }
+  ]
+}

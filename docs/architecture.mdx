@@ -1,0 +1,23 @@
+---
+title: "Architecture"
+description: "Overview of the PulseGuard MVVM architecture and async design."
+---
+
+## Model-View-ViewModel (MVVM)
+
+PulseGuard utilizes MVVM to enforce a clean separation between the user interface and business logic.
+
+- **Models**: Defines data structures mapped directly to patient vital signs (e.g., `PatientDetails`, `VitalReading`).
+- **ViewModels**: Provides data formatting and business logic required by the views. `MainViewModel` orchestrates the LiveCharts abstractions and handles the alerting properties.
+- **Views**: Written strictly in XAML, these are the presentation layers that display information mapped via DataBinding. No logic exists in the code-behind (`App.xaml.cs` or `MainWindow.xaml.cs`).
+
+## Asynchronous Data Streams
+
+Visualizing waveforms at high refresh rates requires a non-blocking asynchronous design.
+PulseGuard achieves this through:
+1. **Background Services**: A service leverages the Task Parallel Library (TPL) to push data updates without hogging the main UI thread.
+2. **Concurrent Observables**: Data collections (like LiveCharts' `ObservableCollection`) interact gracefully across thread boundaries via `.NET` Dispatchers when communicating changes back to the View.
+
+## Real-time Plotting (LiveCharts2)
+
+`LiveChartsCore.SkiaSharpView.Wpf` is used due to its high-performance backend (`SkiaSharp`). Waveforms are updated continuously as new samples are appended to the series buffers.
